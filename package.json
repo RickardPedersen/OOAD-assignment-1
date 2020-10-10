@@ -1,0 +1,23 @@
+{
+  "name": "ooad-assignment-1",
+  "version": "1.0.0",
+  "description": "Assignment in Object-oriented analysis and design at Nackademin",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RickardPedersen/OOAD-assignment-1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RickardPedersen/OOAD-assignment-1/issues"
+  },
+  "homepage": "https://github.com/RickardPedersen/OOAD-assignment-1#readme",
+  "dependencies": {
+    "live-server": "^1.2.1"
+  }
+}
