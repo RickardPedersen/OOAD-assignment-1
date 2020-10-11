@@ -251,7 +251,7 @@ const modulePattern = (function () {
 })()
 ```
 
-Med Revealing Module Pattern så definerar vi istället alla varibler och metoder i det privata scopet och och sen avslöjar (revealar) vi de variabler och metoder som ska vara publika.
+Med Revealing Module Pattern så definerar vi istället alla varibler och metoder i det privata scopet och sen avslöjar (revealar) vi de variabler och metoder som ska vara publika.
 
 ```JavaScript
 const revealingModulePattern = (function () {
