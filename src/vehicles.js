@@ -6,27 +6,32 @@
 
 //******************** Defining Types *******************//
 
-class Rocket {
-	constructor({ name, id, description, active }) {
+class Vehicle {
+	constructor({ name, id }) {
 		this.name = name
 		this.id = id
+	}
+}
+
+class Rocket extends Vehicle {
+	constructor({ name, id, description, active }) {
+		super({ name, id })
 		this.description = description
 		this.active = active
 	}
 }
 
-class Dragon {
+class Dragon extends Vehicle {
 	constructor({ name, id, description, active }) {
-		this.name = name
-		this.id = id
+		super({ name, id })
 		this.description = description
 		this.active = active
 	}
 }
 
-class Ship {
-	constructor({ name, type, roles }) {
-		this.name = name
+class Ship extends Vehicle {
+	constructor({ name, id, type, roles }) {
+		super({ name, id })
 		this.type = type
 		this.roles = roles
 	}
@@ -36,7 +41,7 @@ class Ship {
 
 class VehicleFactory {
 	constructor() {
-		this.vehicleClass = Rocket;
+		this.vehicleClass = Vehicle;
 	}
 
 	createVehicle(options = {}) {
@@ -49,6 +54,10 @@ class VehicleFactory {
 				break
 			case 'ship':
 				this.vehicleClass = Ship
+				break
+			default:
+				this.vehicleClass = Vehicle
+				break
 		}
 
 		return new this.vehicleClass(options)

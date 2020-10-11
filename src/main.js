@@ -1,10 +1,10 @@
 import rixios from './rixios.js'
 import VehicleFactory from './vehicles.js'
 
-const factory = new VehicleFactory()
-const rockets = []
-const dragons = []
-const ships = []
+const factory = new VehicleFactory(),
+	rockets = [],
+	dragons = [],
+	ships = []
 
 // Setup base url for spacex API
 const spacexAPI = rixios.create('https://api.spacexdata.com/v4')
@@ -50,28 +50,64 @@ getVehicles()
 
 
 
+//*******************************************************//
+//
+// CODE EXAMPLES
+//
+//*******************************************************//
 
-//******************** RIXIOS EXAMPLES ********************//
 
-async function rixiosExamples() {
-	// without base url
-	const users = await rixios.get('https://jsonplaceholder.typicode.com/users')
+
+/****************** FACADE PATTERN  *****************/
+
+
+
+/****************** Demo without Facade  *****************/
+
+async function withoutFacade() {
+	async function getUsers() {
+		const response = await fetch('https://jsonplaceholder.typicode.com/users', {
+			method: 'GET',
+			headers: { 'Content-Type': 'application/json' }
+		})
+		return response.json()
+	}
+
+	async function getUserPosts(userId) {
+		const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`, {
+			method: 'GET',
+			headers: { 'Content-Type': 'application/json' }
+		})
+		return response.json()
+	}
+
+	const users = await getUsers()
 	console.log(users)
 	for (const user of users) {
-		// request with query params
-		const posts = await rixios.get('https://jsonplaceholder.typicode.com/posts', { params: { userId: user.id } })
-		console.log(posts)
-	}
-	
-	// with base url
-	const jsonplaceholder = rixios.create('https://jsonplaceholder.typicode.com')
-
-	const users2 = await jsonplaceholder.get('/users')
-	console.log(users2)
-	for (const user of users2) {
-		// request with query params
-		const posts = await jsonplaceholder.get('/posts', { params: { userId: user.id } })
+		const posts = await getUserPosts(user.id)
 		console.log(posts)
 	}
 }
-// rixiosExamples()
+//withoutFacade()
+
+/****************** Demo with Facade (rixios) *****************/
+
+async function withFacade() {
+	const jsonplaceholder = rixios.create('https://jsonplaceholder.typicode.com')
+
+	async function getUsers() {
+		return await jsonplaceholder.get('/users')
+	}
+
+	async function getUserPosts(userId) {
+		return await jsonplaceholder.get('/posts', { params: { userId } })
+	}
+
+	const users = await getUsers()
+	console.log(users)
+	for (const user of users) {
+		const posts = await getUserPosts(user.id)
+		console.log(posts)
+	}
+}
+//withFacade()
