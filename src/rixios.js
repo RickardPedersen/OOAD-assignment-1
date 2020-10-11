@@ -1,5 +1,11 @@
+//*******************************************************//
+//
+// Revealing Module & Facade Pattern
+//
+//*******************************************************//
+
 const rixios = (function () {
-	const defaultHeaders = { 'Content-Type': 'application/json' }
+	const privateDefaultHeaders = { 'Content-Type': 'application/json' }
 
 	async function publicGet(url = '', config = {}) {
 		if (this.baseUrl) {
@@ -8,7 +14,7 @@ const rixios = (function () {
 		const { headers, params } = config
 		return await privateRequest(url, {
 			method: 'GET',
-			headers: headers || defaultHeaders,
+			headers: headers || privateDefaultHeaders,
 			params: { ...params },
 		})
 	}
@@ -42,17 +48,3 @@ const rixios = (function () {
 })()
 
 export default rixios
-
-async function test() {
-	const res = await rixios.get('https://jsonplaceholder.typicode.com/users')
-	const res2 = await rixios.get('https://jsonplaceholder.typicode.com/posts')
-	console.log(res)
-	console.log(res2)
-
-	const api = rixios.create('https://jsonplaceholder.typicode.com')
-	const res3 = await api.get('/users')
-	const res4 = await api.get('/posts')
-	console.log(res3)
-	console.log(res4)
-}
-test()
