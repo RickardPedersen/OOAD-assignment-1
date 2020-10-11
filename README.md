@@ -29,8 +29,10 @@ Grundprincipen bakom Facade Pattern är att dölja komplex kod eller stora kodbl
 
 jQuery är ett exempel på Facade Pattern. Med jQuery kan utvecklare på ett enkelt sätt hantera bland annat DOM-manipulation och AJAX-requests, som innan ES6 var väldigt komplext med JavaScript.
 
-**Exempel:**
+**Exempel**
+
 Så här kan det se ut om man inte använder Facade Pattern:
+
 ```JavaScript
 async function withoutFacade() {
 	async function getUsers() {
@@ -59,8 +61,10 @@ async function withoutFacade() {
 
 withoutFacade()
 ```
-Vi kan istället dölja den komplexa koden bakom en fasad som skulle kunna se ut såhär.
+
+Vi kan istället dölja den komplexa koden bakom en fasad som skulle kunna se ut så här.
 I detta exemplet är fasaden inbygd i en [Revealing Module](https://addyosmani.com/resources/essentialjsdesignpatterns/book/#revealingmodulepatternjavascript). Du kan läsa mer om Revealing Module Pattern längre ner.
+
 ```JavaScript
 const rixios = (function () {
 	const privateDefaultHeaders = { 'Content-Type': 'application/json' }
@@ -105,7 +109,10 @@ const rixios = (function () {
 	}
 })()
 ```
+
 Nu har utvecklarna tillgång till ett användarvänligt gränssnitt!
+Så här skulle det kunna se ut:
+
 ```JavaScript
 async function withFacade() {
 	const jsonplaceholder = rixios.create('https://jsonplaceholder.typicode.com')
@@ -129,8 +136,94 @@ withFacade()
 ```
 
 ### Factory Pattern
+Factory Pattern är, till skillnad från Facade Pattern, ett Skapande designmönster, vilket innebär att det behandlar mekanismer för objektskapande.
+Istället för att skapa object nyckelordet `new` så låter vi vår Factory skapa objektet åt oss.
+
+**Exempel**
+
+Vi börjar med att definera våra classer:
+
+```JavaScript
+class Vehicle {
+	constructor({ name, id }) {
+		this.name = name
+		this.id = id
+	}
+}
+
+class Rocket extends Vehicle {
+	constructor({ name, id, description, active }) {
+		super({ name, id })
+		this.description = description
+		this.active = active
+	}
+}
+
+class Dragon extends Vehicle {
+	constructor({ name, id, description, active }) {
+		super({ name, id })
+		this.description = description
+		this.active = active
+	}
+}
+
+class Ship extends Vehicle {
+	constructor({ name, id, type, roles }) {
+		super({ name, id })
+		this.type = type
+		this.roles = roles
+	}
+}
+```
+
+Så här skapar man objekt enligt [Constructor Pattern](https://addyosmani.com/resources/essentialjsdesignpatterns/book/#constructorpatternjavascript):
+
+```JavaScript
+const rocket = new Rocket()
+const dragon = new Dragon()
+const ship = new Ship()
+```
+
+Men vi kan istället bygga en fabrik som skapar object åt oss:
+
+```JavaScript
+class VehicleFactory {
+	constructor() {
+		this.vehicleClass = Vehicle;
+	}
+
+	createVehicle(options = {}) {
+		switch (options.vehicleType) {
+			case 'rocket':
+				this.vehicleClass = Rocket
+				break
+			case 'dragon':
+				this.vehicleClass = Dragon
+				break
+			case 'ship':
+				this.vehicleClass = Ship
+				break
+			default:
+				this.vehicleClass = Vehicle
+				break
+		}
+
+		return new this.vehicleClass(options)
+	}
+}
+```
+
+Nu kan vi på ett enkelt sätt skapa många olika typer av object genom att använda vår fabrik.
+
+```JavaScript
+const factory = new VehicleFactory()
+const rocket = factory.createVehicle({ vehicleType: 'rocket' })
+const dragon = factory.createVehicle({ vehicleType: 'dragon' })
+const ship = factory.createVehicle({ vehicleType: 'ship' })
+```
 
 ### Revealing Module Pattern
+
 
 ## Dokumentation
 
