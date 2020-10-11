@@ -137,7 +137,7 @@ withFacade()
 
 ### Factory Pattern
 Factory Pattern är, till skillnad från Facade Pattern, ett Skapande designmönster, vilket innebär att det behandlar mekanismer för objektskapande.
-Istället för att skapa object nyckelordet `new` så låter vi vår Factory skapa objektet åt oss.
+Istället för att skapa object med nyckelordet `new` så låter vi vår Factory skapa objektet åt oss.
 
 **Exempel**
 
@@ -223,6 +223,58 @@ const ship = factory.createVehicle({ vehicleType: 'ship' })
 ```
 
 ### Revealing Module Pattern
+Revealing Module Pattern är, precis som Facade Pattern, ett strukturellt designmönster, som behandlar relationer mellan objekt.
+Till skillnad från Facade Pattern, så används Revealing Module Pattern för att efterlikna klasser med public och private inkapsling, en funtionalitet som ES6 klasser har begränsat stöd för. På så sätt kan vi skydda variabler och metoder från det globala scopet.
+Revealing Module Pattern är en "förbättrad" version av [Module Pattern](https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript) som är väldigt liknande.
+
+**Exempel**
+
+I Module Pattern så defineras alla privata variabler och metoder i det privata scopet och alla publika i det publika return-objektet.
+
+```JavaScript
+const modulePattern = (function () {
+	// Encapsulation
+	let counter = 0 // private variable
+
+	return {
+		// public methods
+
+		incrementCounter: function () {
+			return counter++
+		},
+
+		resetCounter: function () {
+			console.log("counter value prior to reset: " + counter)
+			counter = 0
+		}
+	}
+})()
+```
+
+Med Revealing Module Pattern så definerar vi istället alla varibler och metoder i det privata scopet och och sen avslöjar (revealar) vi de variabler och metoder som ska vara publika.
+
+```JavaScript
+const revealingModulePattern = (function () {
+	let privateCounter = 0
+
+	function publicIncrementCounter () {
+		return privateCounter++
+	}
+
+	function publicResetCounter () {
+		console.log("counter value prior to reset: " + privateCounter)
+		privateCounter = 0
+	}
+
+	// Reveal public pointers to
+	// private functions and properties
+	return {
+		incrementCounter: publicIncrementCounter,
+		resetCounter: publicResetCounter
+	}
+})()
+```
+
 
 
 ## Dokumentation
