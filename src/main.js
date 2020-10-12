@@ -1,16 +1,13 @@
 /** TODO
- * mål och användarbehov
- * kravspecifikation
  * bättre pattern beskrivningar (skillnader)
  * mer kommentarer
- * förbättra UML diagram
  */
 import rixios from './rixios.js'
 import VehicleFactory from './vehicles.js'
 
 const factory = new VehicleFactory()
 
-// Setup base url for spacex API
+// Setup base url for SpaceX API
 const spacexAPI = rixios.create('https://api.spacexdata.com/v4')
 
 async function getRockets() {

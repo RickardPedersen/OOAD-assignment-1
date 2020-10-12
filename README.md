@@ -1,5 +1,6 @@
 # OOAD-assignment-1
 Assignment in Object-oriented analysis and design at Nackademin
+GitHub: https://github.com/RickardPedersen/OOAD-assignment-1
 
 ## Setup
 
@@ -282,6 +283,7 @@ Min kund är SpaceX som vill att jag bygger en webbsida åt dom.
 ### Den strategiska nivån
 
 **Intervju med Elon Musk:**
+
 Vi vill visa upp våra raketer, kapslar (dragons) och båtar.
 Vi vill få så många besökare som möjligt (globalt).
 Webbsidan ska ha ett rymdtema.
@@ -294,6 +296,7 @@ Webbsidan ska vara cool.
 - Coolt och inspirerande rymdtema.
 
 **Intervju med potentiella användare:**
+
 Jag vill få en beskrivning av dom olika rymdfordonen.
 Jag vill se vad båtarna används till.
 Jag vill kunna använda webbsidan på min dator och telefon.
@@ -313,9 +316,20 @@ Jag vill se många bilder.
 
 - Alla fordon visas med namn, bild.
 - Raketer och Dragons visas med beskrivning.
-- Båtar visas med information om använding.
+- Båtar visas med information om användingsområden.
 - Rymdbilder.
 
 **Funktionalitet:**
 
 - Hämta data från SpaceX API
+
+### UML-diagram
+
+#### Klassdiagram
+![class diagram](./UML_diagrams/Class_diagram.png)
+
+#### Användningsfallsdiagram
+![Use case diagram](./UML_diagrams/Use_case_diagram.png)
+
+#### Aktivitetsdiagram
+![Activity diagram](./UML_diagrams/Activity_diagram.png)
