@@ -275,14 +275,47 @@ const revealingModulePattern = (function () {
 })()
 ```
 
-
-
 ## Dokumentation
 
-### Garretts designmodell
-1. **Den strategiska nivån**
-Denna nivån handlar om produktmål och användarbehov
-2. **Omfattningsnivån**
-Denna nivån handlar främst om kravspecifikation (innehåll och funtionalitet)
+Min kund är SpaceX som vill att jag bygger en webbsida åt dom.
 
 ### Den strategiska nivån
+
+**Intervju med Elon Musk:**
+Vi vill visa upp våra raketer, kapslar (dragons) och båtar.
+Vi vill få så många besökare som möjligt (globalt).
+Webbsidan ska ha ett rymdtema.
+Webbsidan ska väcka intresse för rymden och SpaceX hos besökaren.
+Webbsidan ska vara cool.
+
+#### Produktmål
+- Visa racketer, dragons och båtar.
+- Locka så många besökare som möjligt.
+- Coolt och inspirerande rymdtema.
+
+**Intervju med potentiella användare:**
+Jag vill få en beskrivning av dom olika rymdfordonen.
+Jag vill se vad båtarna används till.
+Jag vill kunna använda webbsidan på min dator och telefon.
+Jag vill se många bilder.
+
+#### Användarbehov
+- Se information om de olika rymdfordonen.
+- Se vad båtarna används till.
+- Se bilder på rymden och fordonen.
+- Kunna använda webbsidan på dator och mobila enheter.
+
+### Omfattningsnivån
+
+#### Kravspecifikation
+
+**Innehåll:**
+
+- Alla fordon visas med namn, bild.
+- Raketer och Dragons visas med beskrivning.
+- Båtar visas med information om använding.
+- Rymdbilder.
+
+**Funktionalitet:**
+
+- Hämta data från SpaceX API

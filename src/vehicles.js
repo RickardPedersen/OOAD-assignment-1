@@ -14,24 +14,27 @@ class Vehicle {
 }
 
 class Rocket extends Vehicle {
-	constructor({ name, id, description, active }) {
+	constructor({ name, id, flickr_images, description, active }) {
 		super({ name, id })
+		this.images = flickr_images
 		this.description = description
 		this.active = active
 	}
 }
 
 class Dragon extends Vehicle {
-	constructor({ name, id, description, active }) {
+	constructor({ name, id, flickr_images, description, active }) {
 		super({ name, id })
+		this.images = flickr_images
 		this.description = description
 		this.active = active
 	}
 }
 
 class Ship extends Vehicle {
-	constructor({ name, id, type, roles }) {
+	constructor({ name, id, image, type, roles }) {
 		super({ name, id })
+		this.image = image
 		this.type = type
 		this.roles = roles
 	}
