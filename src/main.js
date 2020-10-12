@@ -1,10 +1,14 @@
+/** TODO
+ * mål och användarbehov
+ * kravspecifikation
+ * bättre pattern beskrivningar (skillnader)
+ * mer kommentarer
+ * förbättra UML diagram
+ */
 import rixios from './rixios.js'
 import VehicleFactory from './vehicles.js'
 
-const factory = new VehicleFactory(),
-	rockets = [],
-	dragons = [],
-	ships = []
+const factory = new VehicleFactory()
 
 // Setup base url for spacex API
 const spacexAPI = rixios.create('https://api.spacexdata.com/v4')
@@ -21,93 +25,34 @@ async function getShips() {
 	return await spacexAPI.get('/ships')
 }
 
-async function getVehicles() {
+function createVehicles(data = [], type) {
+	const vehicles = []
+	for (let vehicle of data) {
+		vehicle.vehicleType = type
+		const obj = factory.createVehicle(vehicle)
+		vehicles.push(obj)
+	}
+	return vehicles
+}
+
+const rocketButton = document.getElementById('rocketButton')
+const dragonButton = document.getElementById('dragonButton')
+const shipButton = document.getElementById('shipButton')
+
+rocketButton.addEventListener('click', async function() {
 	const rocketData = await getRockets()
-	for (let rocket of rocketData) {
-		rocket.vehicleType = 'rocket'
-		const obj = factory.createVehicle(rocket)
-		rockets.push(obj)
-	}
+	const rockets = createVehicles(rocketData, 'rocket')
 	console.log(rockets)
+})
 
+dragonButton.addEventListener('click', async function() {
 	const dragonData = await getDragons()
-	for (let dragon of dragonData) {
-		dragon.vehicleType = 'dragon'
-		const obj = factory.createVehicle(dragon)
-		dragons.push(obj)
-	}
+	const dragons = createVehicles(dragonData, 'dragon')
 	console.log(dragons)
+})
 
+shipButton.addEventListener('click', async function() {
 	const shipData = await getShips()
-	for (let ship of shipData) {
-		ship.vehicleType = 'ship'
-		const obj = factory.createVehicle(ship)
-		ships.push(obj)
-	}
+	const ships = createVehicles(shipData, 'ship')
 	console.log(ships)
-}
-getVehicles()
-
-
-
-//*******************************************************//
-//
-// CODE EXAMPLES
-//
-//*******************************************************//
-
-
-
-/****************** FACADE PATTERN  *****************/
-
-
-
-/****************** Demo without Facade  *****************/
-
-async function withoutFacade() {
-	async function getUsers() {
-		const response = await fetch('https://jsonplaceholder.typicode.com/users', {
-			method: 'GET',
-			headers: { 'Content-Type': 'application/json' }
-		})
-		return response.json()
-	}
-
-	async function getUserPosts(userId) {
-		const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`, {
-			method: 'GET',
-			headers: { 'Content-Type': 'application/json' }
-		})
-		return response.json()
-	}
-
-	const users = await getUsers()
-	console.log(users)
-	for (const user of users) {
-		const posts = await getUserPosts(user.id)
-		console.log(posts)
-	}
-}
-//withoutFacade()
-
-/****************** Demo with Facade (rixios) *****************/
-
-async function withFacade() {
-	const jsonplaceholder = rixios.create('https://jsonplaceholder.typicode.com')
-
-	async function getUsers() {
-		return await jsonplaceholder.get('/users')
-	}
-
-	async function getUserPosts(userId) {
-		return await jsonplaceholder.get('/posts', { params: { userId } })
-	}
-
-	const users = await getUsers()
-	console.log(users)
-	for (const user of users) {
-		const posts = await getUserPosts(user.id)
-		console.log(posts)
-	}
-}
-//withFacade()
+})
