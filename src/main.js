@@ -1,7 +1,3 @@
-/** TODO
- * bättre pattern beskrivningar (skillnader)
- * mer kommentarer
- */
 import rixios from './rixios.js'
 import VehicleFactory from './vehicles.js'
 
